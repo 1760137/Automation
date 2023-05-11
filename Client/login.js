@@ -1,5 +1,5 @@
 
-import { Selector } from 'testcafe';
+import { Selector } from 'testcafe'; 
 
 fixture `Sign in`
     .page `https://beta.jccomputing.sunny.net.vn/other/login`;
