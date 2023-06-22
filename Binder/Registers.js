@@ -145,7 +145,7 @@ test('Registers', async t => {
         await t.wait(2000)
         .click(button_admin_accept)
         .expect(Selector(expect_success_selection).innerText).eql(expect_success_text)
-        openmail(t,link_receivemail,title_mail,expect_title_4,1)//----[expect_title_2]-[Your Eligibility Proof has been accepted]
+        openmail(t,link_receivemail,title_mail,expect_title_4,1)//----[expect_title_4]-[Your Eligibility Proof has been accepted]
         await t.click(button_admin_cancelaccept)
         .typeText(form_admin_accept,resason_admin_accept)
         .click(button_admin_save_accept)
