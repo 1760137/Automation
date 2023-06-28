@@ -141,6 +141,37 @@ test('Registers', async t => {
         .click(button_admin_save_cancel)
         .expect(Selector(expect_success_selection).innerText).eql(expect_success_text)
         openmail(t,link_receivemail,title_mail,expect_title_2,1)//----[expect_title_2]-[Your Eligibility Proof is in verification process]
+
+        //--[Request] màu cam
+        .wait(2000)
+        .click(radio_admin_no)
+        .click(select_admin)
+        .click(select_item_admin)
+        .typeText(form_admin,resason_admin)
+        //click no câu 2
+        // .click(radio_admin_no)
+        // .click(select_admin)
+        // .click(select_item_admin)
+        // .typeText(form_admin,resason_admin)
+        .click(khoangtrong)
+        .click(button_admin_requestupdate)
+        .expect(Selector(expect_success_selection).innerText).eql(expect_success_text)
+
+        //---------> Check mail
+        .openWindow(link_receivemail).maximizeWindow().wait(5000).click(button_reload)
+        const clickRequest=Selector(title_mail).withText(expect_title_5)//----[expect_title_5]-["Request additional information for your Eligibility Proof"]
+        const clickbuttonRequest=Selector('#root div').withText('Provide information').nth(11)// location button create password
+        await t.click(clickRequest)
+        .click(clickbuttonRequest)
+        //.typeText(form_email,"Yarraville VIC 3013, Australia")
+        //debug()
+        //click submit
+        // check mail
+        .closeWindow()
+        //sang admin
+        //tìm mail
+        //start
+        //yes 2 câu
         //--[Accept]
         await t.wait(2000)
         .click(button_admin_accept)
@@ -150,20 +181,7 @@ test('Registers', async t => {
         .typeText(form_admin_accept,resason_admin_accept)
         .click(button_admin_save_accept)
         .expect(Selector(expect_success_selection).innerText).eql(expect_success_text)
-        //--[Invalid]
-        .wait(2000)
-        .click(radio_admin_no)
-        .click(select_admin)
-        .click(select_item_admin)
-        .typeText(form_admin,resason_admin)
-        .click(khoangtrong)
-        .click(button_admin_requestupdate)
-        .expect(Selector(expect_success_selection).innerText).eql(expect_success_text)
-        //--------->Check mail
-        .openWindow(link_receivemail).maximizeWindow().wait(5000).click(button_reload)
-        const clickRequest=Selector(title_mail).withText(expect_title_5)//----[expect_title_5]-["Request additional information for your Eligibility Proof"]
-        const clickbuttonRequest=Selector('#root div').withText('Provide information').nth(11)// location button create password
-        await t.click(clickRequest)
-        .click(clickbuttonRequest)
-        .closeWindow()
+        //--[Cancel]
+        //--[Accept]
+
 })
