@@ -28,9 +28,15 @@ fixture`Registers`
     const resason_admin_accept="test accept"
     const button_admin_save_accept="body div:nth-child(8) .innos-ui-button-default .innos-ui-button-inner"
     const radio_admin_no="#addressRequestEdit .innos-ui-radio-group-col:nth-of-type(2) .innos-ui-radio-b-inn"
+    const radio_admin_no1="#isRequireUpdate2A .innos-ui-radio-group-col:nth-of-type(2) .innos-ui-radio-b-inn"
+    const radio_admin_yes="#addressRequestEdit .innos-ui-radio-group-col:nth-of-type(1) .innos-ui-radio-b-inn"
+    const radio_admin_yes1="#isRequireUpdate2A .innos-ui-radio-group-col:nth-of-type(1) .innos-ui-radio-b-inn"
     const select_admin="[class='innos-ui-col innos-ui-grid-span-5'] .innos-ui-select-selector"
+    const select_admin1="[class='control-update-2a'] .innos-ui-select-selector"
     const select_item_admin="div[title='Other reason'] > .innos-ui-select-item-option-content"
+    const select_item_admin1="body div:nth-child(12) [title='Other reason'] .innos-ui-select-item-option-content"
     const form_admin="textarea#addressRequestEditNote"
+    const form_admin1="textarea#reasonOtherUpdate2A"
     const resason_admin="test invalid"
     const khoangtrong=".retail-enrolmentForm-detail-no-scroll > div:nth-of-type(4) > div"
     const button_admin_requestupdate=".innos-ui-button-critical .innos-ui-button-inner"
@@ -79,7 +85,7 @@ test('Registers', async t => {
     .typeText("#password",pass)
     .click(button_login_admin)
     //[Mail Temp]
-    const mail_temp=await t.openWindow(link_mail_temp).maximizeWindow()
+    const mail_temp=await t.openWindow(link_mail_temp).debug().maximizeWindow()
     const emails=await Selector(value_email).value
     const link_receivemail="https://www.emailnator.com/inbox/#"+emails // link receive of mail
     //[Parent]
@@ -149,10 +155,10 @@ test('Registers', async t => {
         .click(select_item_admin)
         .typeText(form_admin,resason_admin)
         //click no câu 2
-        // .click(radio_admin_no)
-        // .click(select_admin)
-        // .click(select_item_admin)
-        // .typeText(form_admin,resason_admin)
+        .click(radio_admin_no1)
+        .click(select_admin1)
+        .click(select_item_admin1)
+        .typeText(form_admin1,resason_admin)
         .click(khoangtrong)
         .click(button_admin_requestupdate)
         .expect(Selector(expect_success_selection).innerText).eql(expect_success_text)
@@ -163,15 +169,28 @@ test('Registers', async t => {
         const clickbuttonRequest=Selector('#root div').withText('Provide information').nth(11)// location button create password
         await t.click(clickRequest)
         .click(clickbuttonRequest)
-        //.typeText(form_email,"Yarraville VIC 3013, Australia")
-        //debug()
-        //click submit
-        // check mail
+        .typeText(form_email,"Yarraville VIC 3013, Australia")
+        .debug()
+        .click("#idSubmit .btn-text")
+        //[Mail Temp]-[Check  Mail]
+        .navigateTo(link_receivemail)
+        .wait(5000)
+        .click(button_reload)
+        .expect(Selector(title_mail).withText(expect_title_1).count).eql(1)
         .closeWindow()
         //sang admin
-        //tìm mail
-        //start
-        //yes 2 câu
+        .click(menu_Enrolment)
+        .click(menu_item_form)
+        .wait(2000)
+        .typeText(form_search,emails)
+        .click(button_view)
+        .wait(2000)
+        .click(button_admin_eye)
+        //--[Start]
+        .click(button_admin_start)
+        openmail(t,link_receivemail,title_mail,expect_title_2,1)
+        .click(radio_admin_yes)
+        .click(radio_admin_yes1)
         //--[Accept]
         await t.wait(2000)
         .click(button_admin_accept)
