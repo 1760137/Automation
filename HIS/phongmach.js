@@ -20,7 +20,7 @@ fixture `phongmach`
     .click(menu_khambenh)
     .click(menu_khambenhpm)
 
-    // khám bệnh nhân được tiếp nhận mới
+    //-============ khám bệnh nhân được tiếp nhận mới ==============
     // .click(button_themvatimkiem)
     // .typeText(hoten)
     // .typeText(Ngaysinh)
@@ -50,5 +50,11 @@ fixture `phongmach`
     // .click(button_save)
     // .click(ingiayhen)
     // .click(intoa)
-    
+
+
+    //-============ khám bệnh nhân đã có tiếp nhận (cũ) ==============
+    // .click(button_themvatimkiem)
+    //typeText(grid_ten,"LÊ HỮU QUỐC") lọc tên hoặc mã KH-23001007
+    //doubleclick vô dòng đc lọc -> chọn dc bệnh nhân ra
+    //bấm nút khám rồi cop y như trên là done
 
