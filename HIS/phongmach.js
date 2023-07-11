@@ -1,7 +1,7 @@
 import { Selector } from 'testcafe';
 
 fixture `phongmach`
-    .page `https://demopm.vhis.vn/`
+    .page `https://test.vhis.vn/`
     .skipJsErrors();
 
     const form_user= "input#username"
