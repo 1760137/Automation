@@ -49,6 +49,18 @@ fixture `phongmach`
     const hentaikham="label#HenTaiKham  .innos-ui-icon.innos-ui-icon-accept"
     const form_taikham="input#SoNgayHenTaiKham"
     const taikham="7"
+    const list_thuoc=[
+        {tenthuoc:"Glovitor 20",Sang:1,Trua:1,Chieu:0,Toi:2},
+        {tenthuoc:"Smecta",Sang:1,Trua:1,Chieu:1,Toi:0}
+    ]
+    const form_tenthuoc="input#TenThuoc"
+    const form_buoisang="input#SoLuong_BuoiSang"
+    const form_buoitrua="input#SoLuong_BuoiTrua"
+    const form_buoichieu="input#SoLuong_BuoiChieu"
+    const form_buoitoi="input#SoLuong_BuoiToi"
+    const button_themthuoc="div:nth-of-type(3) > div:nth-of-type(2) > .innos-ui-button.innos-ui-button-default.innos-ui-button-medium  .innos-ui-button-content"
+    const form_loidan=".innos-ui-select-selector > .innos-ui-select-selection-search > .innos-ui_select_8 "
+    const item_loidan="div[label='uống sau khi ăn'] > div > div"
 
     
 //-============ khám bệnh nhân được tiếp nhận mới ==============
@@ -95,16 +107,34 @@ fixture `phongmach`
             .click(item_huonggiaiquyet)
             .click(hentaikham)
             .typeText(form_taikham,taikham)
+            for(const item of list_thuoc )
+            {
+                if(item.Sang!=0)
+                {
+                    await t.typeText(form_buoisang,item.Sang)
+                }
+                if(item.Trua!=0)
+                {
+                    await t.typeText(form_buoitrua,item.Trua)
+                }
+                if(item.Chieu!=0)
+                {
+                    await t.typeText(form_buoichieu,item.Chieu)
+                }
+                if(item.Toi!=0)
+                {
+                    await t.typeText(form_buoitoi,item.Toi)
+                }
+                await t.typeText(form_tenthuoc,item.tenthuoc)
+                .click(form_loidan)
+                .click(item_loidan)
+                .click(button_themthuoc)
+                .click(form_tenthuoc)
+                .pressKey("ctrl+a")
+                .pressKey("delete")
+            }
     })
 
-    // chỗ này chạy for cho nhập thuốc nha
-    // list thuoc: Arcoxia 60mg, Alaxan, Aerius, Scolanzo
-    // .typeText(tenthuoc, "Arcoxia 60mg")
-    // .typeText(sang,"1")
-    // .typeText(trua,"1")
-    // .typeText(toi,"2")
-    // .presskey('enter')
-    // .select(loidan) chọn value bất kì
     // .click(button_save)
     // .click(ingiayhen)
     // .click(intoa)
